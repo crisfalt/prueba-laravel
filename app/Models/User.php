@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'birthdate',
+        'city'
     ];
 
     /**
@@ -42,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function favoritos()
+    {
+        return $this->belongsToMany(Favorite::class, 'favoritos', 'id', 'id_usuario');
+    }
 }
