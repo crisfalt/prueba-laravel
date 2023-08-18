@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if (!is_null(Auth::user())) {
-        return redirect('home');    
-    }
     return view('auth.login');
 });
 
 Auth::routes();
 
 Route::middleware(['auth'])->group(function ($route) {
+    Route::get('/', function () {
+        return redirect('home');
+    });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     $route->group(['prefix' => 'register-user'], function ($route) {
         Route::get('/', [App\Http\Controllers\UserController::class, 'create']);
