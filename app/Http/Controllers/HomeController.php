@@ -52,7 +52,7 @@ class HomeController extends Controller
     public function setFavorite($id)
     {
         $user = Auth::user();
-        $apiReference = Favorite::where('ref_api', $id)->first();
+        $apiReference = Favorite::where('ref_api', $id)->where('id_usuario', $user->id)->first();
         if (! is_null($apiReference)) {
             return self::index('El pokemon ya se encuentra como favorito');
         }
